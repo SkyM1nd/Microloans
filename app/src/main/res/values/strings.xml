@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Martynov</string>
+    <string name="next">Next</string>
+    <string name="fragment_media">Fragment Media</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="fragment_a">Fragment A</string>
+    <string name="fragment_c">Fragment C</string>
 </resources>
