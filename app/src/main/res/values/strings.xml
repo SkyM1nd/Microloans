@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Martynov</string>
-    <string name="next">Next</string>
+    <string name="clear_db">Clear DB</string>
     <string name="fragment_media">Fragment Media</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
-    <string name="fragment_a">Fragment A</string>
-    <string name="fragment_c">Fragment Contacts</string>
+    <string name="fragment_select">Fragment select</string>
+    <string name="fragment_contacts">Fragment Contacts</string>
     <string name="request_button">Permission</string>
     <string name="contacts">Contacts</string>
+    <string name="db">DB</string>
+    <string name="file">File</string>
+    <string name="clear_file">clear File</string>
+    <string name="id">id:</string>
+    <string name="name">name:</string>
+    <string name="phone">phone:</string>
 </resources>

@@ -3,13 +3,14 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
 
     defaultConfig {
         applicationId "com.example.martynov"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -45,6 +46,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'androidx.activity:activity-ktx:1.6.0-alpha01'
+
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 }
 repositories {
     mavenCentral()
