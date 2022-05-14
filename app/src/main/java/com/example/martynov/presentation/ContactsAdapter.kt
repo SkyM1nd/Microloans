@@ -1,13 +1,14 @@
-package com.example.martynov
-
+package com.example.martynov.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.martynov.R
+import com.example.martynov.domain.entities.ContactEntity
 
-class ContactsAdapter(private val onClick: (String) -> Unit) :
+class ContactsAdapter(private val onClick: (ContactEntity) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private companion object {
@@ -45,7 +46,7 @@ class ContactsAdapter(private val onClick: (String) -> Unit) :
     }
 }
 
-class NameViewHolder(parent: ViewGroup, private val onClick: (String) -> Unit) :
+class NameViewHolder(parent: ViewGroup, private val onClick: (ContactEntity) -> Unit) :
     RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
     ) {
@@ -57,6 +58,6 @@ class NameViewHolder(parent: ViewGroup, private val onClick: (String) -> Unit) :
             item.name
         itemView.findViewById<TextView>(R.id.phoneContact).text =
             item.phone
-        itemView.setOnClickListener { onClick(item.name) }
+        itemView.setOnClickListener { onClick(item) }
     }
 }

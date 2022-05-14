@@ -1,10 +1,10 @@
-package com.example.martynov.dialogs
+package com.example.martynov.presentation.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.example.martynov.MainActivity
+import com.example.martynov.presentation.MainActivity
 
 open class PermissionDialogFragment : DialogFragment() {
     companion object {

@@ -1,4 +1,4 @@
-package com.example.martynov
+package com.example.martynov.presentation
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -7,11 +7,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.example.martynov.dialogs.DeniedPermissionDialogFragment
-import com.example.martynov.dialogs.PermissionDialogFragment
-import com.example.martynov.fragments.SelectSaveFragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.martynov.R
+import com.example.martynov.app.App
+import com.example.martynov.presentation.dialogs.DeniedPermissionDialogFragment
+import com.example.martynov.presentation.dialogs.PermissionDialogFragment
+import com.example.martynov.presentation.fragments.SelectSaveFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ContactsViewModelFactory
+
+    private lateinit var viewModel: ContactsViewModel
 
     private val singlePermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -25,7 +34,6 @@ class MainActivity : AppCompatActivity() {
                 }
             val manager = supportFragmentManager
             myDialogFragment.show(manager, "myDialog")
-
         }
     }
 
@@ -33,16 +41,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val transactionName = "Add Fragment select"
-        val fragment = SelectSaveFragment.newInstance()
-
         if (savedInstanceState == null) {
+            (applicationContext as App).appComponent.inject(this)
+
+            viewModel = ViewModelProvider(this, viewModelFactory)[ContactsViewModel::class.java]
+
+            val transactionName = "Add Fragment select"
+            val fragment = SelectSaveFragment.newInstance()
+
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragmentContainer, fragment, "Fragment select")
                 .addToBackStack(transactionName)
                 .commit()
         }
-
         checkPermission()
     }
 

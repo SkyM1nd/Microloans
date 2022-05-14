@@ -1,4 +1,4 @@
-package com.example.martynov.dialogs
+package com.example.martynov.presentation.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
