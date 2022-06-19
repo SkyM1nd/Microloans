@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="snackbar_style" parent="@style/Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@color/design_default_color_on_secondary</item>
+    </style>
+
+</resources>

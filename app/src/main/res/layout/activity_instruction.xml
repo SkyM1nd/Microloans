@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/popupWindowConditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textlines_conditions"
+            android:elevation="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
+            app:layout_constraintTop_toTopOf="@+id/fragmentContainer">
+
+            <TextView
+                android:id="@+id/amountMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLines="1"
+                android:text="@string/amount_instruction"
+                android:textSize="@dimen/fragment_name_text_size"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/currentPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLines="1"
+                android:text="@string/period_instruction"
+                android:textSize="@dimen/fragment_name_text_size"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+            <TextView
+                android:id="@+id/currentPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLines="1"
+                android:text="@string/percent_instruction"
+                android:textSize="@dimen/fragment_name_text_size"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@string/conditions"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/max_amount"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/percent"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/period"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/helpTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/textlines_conditions"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="@dimen/fragment_name_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/instructionTabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/menuPointer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/pointer"
+            android:elevation="2dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_twotone_pan_tool_alt_24" />
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/helpTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/instructionTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabContentStart="56dp"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="historyItem"
+                android:text="@string/history"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="44dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/update_history"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="menuItem"
+                android:text="@string/menu"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="detailItem"
+                android:text="@string/open_detail_loan"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="detailItem"
+                android:text="@string/detail"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/create_new_loan"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/conditions"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/fill_fields"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/new_loan"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/success_loan"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="newLoanItem"
+                android:text="@string/end"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="683dp" />
+
+        </com.google.android.material.tabs.TabLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/touchHand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:contentDescription="@string/pointer"
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_twotone_touch_app_24" />
+
+</FrameLayout>

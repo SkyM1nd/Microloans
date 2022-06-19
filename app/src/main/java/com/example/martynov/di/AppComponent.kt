@@ -1,7 +1,9 @@
 package com.example.martynov.di
 
-import com.example.martynov.presentation.MainActivity
-import com.example.martynov.presentation.fragments.*
+import com.example.martynov.ui.LoginActivity
+import com.example.martynov.ui.fragments.LoanDetailFragment
+import com.example.martynov.ui.fragments.LoanHistoryFragment
+import com.example.martynov.ui.fragments.NewLoanFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,17 +13,14 @@ import javax.inject.Singleton
         AppModule::class,
         DataModule::class,
         DomainModule::class,
-        FileModule::class,
-        PhoneBookModule::class,
-        RoomModule::class,
-        SharedPreferencesModule::class
+        PresentationModule::class
     ]
 )
 interface AppComponent {
-    fun inject(mainActivity: MainActivity)
-    fun inject(databaseFragment: DatabaseFragment)
-    fun inject(fileFragment: FileFragment)
-    fun inject(addFragment: AddFragment)
-    fun inject(editorFragment: EditorFragment)
-    fun inject(selectSaveFragment: SelectSaveFragment)
+
+    fun inject(loginActivity: LoginActivity)
+
+    fun inject(loanHistoryFragment: LoanHistoryFragment)
+
+    fun inject(newLoanFragment: NewLoanFragment)
 }

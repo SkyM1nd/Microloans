@@ -1,37 +1,21 @@
 package com.example.martynov.di
 
-import com.example.martynov.domain.repository.ContactsRepository
-import com.example.martynov.domain.usecases.*
+import com.example.martynov.data.repository.LoanRepositoryImpl
+import com.example.martynov.data.repository.LoginRepositoryImpl
+import com.example.martynov.domain.repository.LoanRepository
+import com.example.martynov.domain.repository.LoginRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-
+import javax.inject.Singleton
 
 @Module
-class DomainModule {
+interface DomainModule {
 
-    @Provides
-    fun provideGetContactsUseCase(contactsRepository: ContactsRepository): GetContactsUseCase {
-        return GetContactsUseCase(contactsRepository)
-    }
+    @Singleton
+    @Binds
+    fun bindLoginRepository(impl: LoginRepositoryImpl): LoginRepository
 
-    @Provides
-    fun provideClearContactsUseCase(contactsRepository: ContactsRepository): ClearContactsUseCase {
-        return ClearContactsUseCase(contactsRepository)
-    }
-
-    @Provides
-    fun provideEditContactUseCase(contactsRepository: ContactsRepository): EditContactUseCase {
-        return EditContactUseCase(contactsRepository)
-    }
-
-    @Provides
-    fun provideAddContactUseCase(contactsRepository: ContactsRepository): AddContactUseCase {
-        return AddContactUseCase(contactsRepository)
-    }
-
-    @Provides
-    fun provideDeleteContactUseCase(contactsRepository: ContactsRepository): DeleteContactUseCase {
-        return DeleteContactUseCase(contactsRepository)
-    }
-
+    @Singleton
+    @Binds
+    fun bindLoanRepository(impl: LoanRepositoryImpl): LoanRepository
 }

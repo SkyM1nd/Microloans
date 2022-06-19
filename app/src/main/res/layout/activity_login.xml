@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginCoordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.LoginActivity">
+
+        <EditText
+            android:id="@+id/editTextUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints=""
+            android:background="#F5EEFF"
+            android:ems="10"
+            android:hint="@string/login"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColorHint="@color/purple_700"
+            app:layout_constraintBottom_toTopOf="@+id/editTextUserPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextUserPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:autofillHints=""
+            android:background="#F5EEFF"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColorHint="@color/purple_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/signIn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/registrationButton"
+            app:layout_constraintEnd_toEndOf="@+id/registrationButton"
+            app:layout_constraintStart_toStartOf="@+id/registrationButton"
+            app:layout_constraintTop_toBottomOf="@+id/editTextUserPassword" />
+
+        <Button
+            android:id="@+id/registrationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/registration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+        <ProgressBar
+            android:id="@+id/loginProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="2dp"
+            android:indeterminate="false"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

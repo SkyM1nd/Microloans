@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/textlines"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/amount"
+        app:srcCompat="@drawable/ic_baseline_assignment_24" />
+
+    <TextView
+        android:id="@+id/_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/amount"
+        android:textSize="@dimen/fragment_name_text_size"
+        app:layout_constraintStart_toStartOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:maxLines="1"
+        android:textSize="@dimen/fragment_name_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/detail"
+        app:layout_constraintStart_toEndOf="@+id/_amount"
+        app:layout_constraintTop_toTopOf="@+id/_amount"
+        tools:text="15000" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:textSize="@dimen/fragment_name_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12 июня 2022" />
+
+    <TextView
+        android:id="@+id/_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="@string/state"
+        android:textSize="@dimen/fragment_name_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_amount" />
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:gravity="start"
+        android:textSize="@dimen/fragment_name_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/detail"
+        app:layout_constraintStart_toEndOf="@+id/_state"
+        app:layout_constraintTop_toTopOf="@+id/_state"
+        tools:text="Зарегистрирована" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

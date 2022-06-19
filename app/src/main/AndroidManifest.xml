@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.martynov">
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.App"
@@ -12,12 +13,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Martynov">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true"
             android:noHistory="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.LoanActivity"
+            android:exported="true"
+            android:noHistory="false">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.instruction.InstructionActivity"
+            android:exported="true"
+            android:noHistory="false">
+            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
