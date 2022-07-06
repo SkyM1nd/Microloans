@@ -1,4 +1,4 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.martynov.R
 import com.example.martynov.domain.entity.LoanEntity
 import com.example.martynov.presentation.instruction.InstructionLoanAdapter
+import com.example.martynov.ui.instruction.InstructionConstants
 
-class OpenDetailInstructionFragment : BaseInstructionFragment() {
+class OpenDetailInstructionFragment : BaseHistoryInstructionFragment() {
 
-    companion object {
-        fun newInstance(): OpenDetailInstructionFragment =
-            OpenDetailInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.OPEN_DETAIL_TAB_NAME
+    override val description = InstructionConstants.OPEN_DETAIL_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,

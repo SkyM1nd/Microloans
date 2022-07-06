@@ -1,17 +1,16 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.martynov.R
+import com.example.martynov.ui.instruction.InstructionConstants
 
-class HistoryInstructionFragment : BaseInstructionFragment() {
+class HistoryInstructionFragment : BaseHistoryInstructionFragment() {
 
-    companion object {
-        fun newInstance(): HistoryInstructionFragment =
-            HistoryInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.HISTORY_TAB_NAME
+    override val description = InstructionConstants.HISTORY_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,

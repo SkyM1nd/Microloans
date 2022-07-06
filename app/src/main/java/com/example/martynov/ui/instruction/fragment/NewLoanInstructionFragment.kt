@@ -1,4 +1,4 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,16 +8,15 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.martynov.R
+import com.example.martynov.ui.instruction.InstructionConstants
 import com.example.martynov.utils.Constants
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
 
-class NewLoanInstructionFragment : Fragment() {
+class NewLoanInstructionFragment : BaseInstructionFragment() {
 
-    companion object {
-        fun newInstance(): NewLoanInstructionFragment =
-            NewLoanInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.NEW_LOAN_TAB_NAME
+    override val description = InstructionConstants.NEW_LOAN_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,27 +32,27 @@ class NewLoanInstructionFragment : Fragment() {
             "" + view.findViewById<MaterialToolbar>(R.id.toolbar).title + Constants.INSTRUCTION_TITLE
 
         view.findViewById<TextInputEditText>(R.id.amount).apply {
-            setText("15000")
+            setText(context.getString(R.string.amount_example))
             isFocusable = false
         }
         view.findViewById<TextInputEditText>(R.id.firstName).apply {
-            setText("Иван")
+            setText(context.getString(R.string.name_example))
             isFocusable = false
         }
         view.findViewById<TextInputEditText>(R.id.lastName).apply {
-            setText("Иванов")
+            setText(context.getString(R.string.last_name_example))
             isFocusable = false
         }
         view.findViewById<TextInputEditText>(R.id.percent).apply {
-            setText("9.5")
+            setText(context.getString(R.string.percent_example))
             isFocusable = false
         }
         view.findViewById<TextInputEditText>(R.id.period).apply {
-            setText("30")
+            setText(context.getString(R.string.period_example))
             isFocusable = false
         }
         view.findViewById<TextInputEditText>(R.id.phoneNumber).apply {
-            setText("+88005553535")
+            setText(context.getString(R.string.phone_number_example))
             isFocusable = false
         }
 

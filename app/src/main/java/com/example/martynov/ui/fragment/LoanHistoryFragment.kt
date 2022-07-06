@@ -1,4 +1,4 @@
-package com.example.martynov.ui.fragments
+package com.example.martynov.ui.fragment
 
 import android.content.Context
 import android.content.Intent

@@ -1,4 +1,4 @@
-package com.example.martynov.ui.fragments
+package com.example.martynov.ui.fragment
 
 import android.app.Dialog
 import android.content.Context
@@ -18,7 +18,6 @@ import com.example.martynov.presentation.HandlerResult
 import com.example.martynov.presentation.viewmodel.NewLoanViewModel
 import com.example.martynov.presentation.viewmodel.NewLoanViewModelFactory
 import com.example.martynov.ui.snackbar.LoanSnackbar
-import com.example.martynov.ui.snackbar.LoginSnackbar
 import com.example.martynov.utils.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -90,7 +89,7 @@ class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
                 period.text.toString().isNotEmpty() &&
                 phoneNumber.text.toString().isNotEmpty()
             ) {
-                var amountAboveZero: Boolean = false
+                val amountAboveZero: Boolean
                 try {
                     amountAboveZero = amount.text.toString().toInt() > 0
                 } catch (e: Exception) {

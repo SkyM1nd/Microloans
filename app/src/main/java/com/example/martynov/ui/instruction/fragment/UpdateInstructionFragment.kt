@@ -1,23 +1,28 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.forEach
+import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.martynov.R
 import com.example.martynov.presentation.instruction.InstructionViewModel
+import com.example.martynov.ui.instruction.InstructionConstants
 
-class UpdateInstructionFragment : BaseInstructionFragment() {
+class UpdateInstructionFragment : BaseHistoryInstructionFragment() {
 
-    companion object {
-        fun newInstance(): UpdateInstructionFragment =
-            UpdateInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.UPDATE_HISTORY_TAB_NAME
+    override val description = InstructionConstants.UPDATE_HISTORY_INSTRUCTION
+
+    private val instructionViewModel: InstructionViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,12 +34,26 @@ class UpdateInstructionFragment : BaseInstructionFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val instructionViewModel: InstructionViewModel by requireActivity().viewModels()
-
         setDataInRecyclerView(
             view,
             listOf(listItem[0])
         )
+
+        instructionViewModel.historyAnimStepTwo.observe(viewLifecycleOwner) {
+            view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).isRefreshing = true
+        }
+
+        instructionViewModel.historyAnimStepThree.observe(viewLifecycleOwner) {
+            view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).isRefreshing = false
+            setDataInRecyclerView(view, listItem)
+        }
+
+        instructionViewModel.historyAnimStepFour.observe(viewLifecycleOwner) {
+            setDataInRecyclerView(view, listOf(listItem[0]))
+        }
+    }
+
+    private fun startAnimation() {
 
         val touchHand = requireActivity().findViewById<ImageView>(R.id.touchHand)
 
@@ -60,23 +79,24 @@ class UpdateInstructionFragment : BaseInstructionFragment() {
         }
 
         instructionViewModel.startAnimatorSet(anim1, anim2, anim3, anim4)
+    }
 
-        instructionViewModel.historyAnimStepTwo.observe(viewLifecycleOwner) {
-            view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).isRefreshing = true
-        }
-
-        instructionViewModel.historyAnimStepThree.observe(viewLifecycleOwner) {
-            view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).isRefreshing = false
-            setDataInRecyclerView(view, listItem)
-        }
-
-        instructionViewModel.historyAnimStepFour.observe(viewLifecycleOwner) {
-            setDataInRecyclerView(view, listOf(listItem[0]))
-        }
+    override fun onResume() {
+        super.onResume()
+        startAnimation()
     }
 
     override fun onPause() {
         super.onPause()
-        this.onDestroy()
+        instructionViewModel.stopAnimatorSet()
+
+        val myLayout: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        myLayout.gravity = Gravity.CENTER
+        requireActivity().findViewById<ImageView>(R.id.touchHand).apply {
+            alpha = 0f
+            layoutParams = myLayout
+        }
     }
 }

@@ -1,9 +1,8 @@
 package com.example.martynov.di
 
 import com.example.martynov.ui.LoginActivity
-import com.example.martynov.ui.fragments.LoanDetailFragment
-import com.example.martynov.ui.fragments.LoanHistoryFragment
-import com.example.martynov.ui.fragments.NewLoanFragment
+import com.example.martynov.ui.fragment.LoanHistoryFragment
+import com.example.martynov.ui.fragment.NewLoanFragment
 import dagger.Component
 import javax.inject.Singleton
 

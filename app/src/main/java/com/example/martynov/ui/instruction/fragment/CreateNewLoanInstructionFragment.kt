@@ -1,4 +1,4 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.martynov.R
+import com.example.martynov.ui.instruction.InstructionConstants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class CreateNewLoanInstructionFragment : BaseInstructionFragment() {
+class CreateNewLoanInstructionFragment : BaseHistoryInstructionFragment() {
 
-    companion object {
-        fun newInstance(): CreateNewLoanInstructionFragment =
-            CreateNewLoanInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.CREATE_NEW_LOAN_TAB_NAME
+    override val description = InstructionConstants.CREATE_NEW_LOAN_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,

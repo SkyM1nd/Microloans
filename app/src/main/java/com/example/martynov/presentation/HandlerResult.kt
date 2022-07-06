@@ -2,7 +2,6 @@ package com.example.martynov.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.martynov.domain.entity.RepositoryResult
 import com.example.martynov.domain.entity.ResultStatus
 import com.example.martynov.presentation.viewmodel.BaseViewModel

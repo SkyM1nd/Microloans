@@ -1,4 +1,4 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
@@ -9,16 +9,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.martynov.R
 import com.example.martynov.domain.entity.State
+import com.example.martynov.ui.instruction.InstructionConstants
 import com.example.martynov.utils.Constants
 import com.google.android.material.appbar.MaterialToolbar
 import java.util.*
 
-class DetailInstructionFragment : Fragment() {
+class DetailInstructionFragment : BaseInstructionFragment() {
 
-    companion object {
-        fun newInstance(): DetailInstructionFragment =
-            DetailInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.DETAIL_TAB_NAME
+    override val description = InstructionConstants.DETAIL_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +32,17 @@ class DetailInstructionFragment : Fragment() {
         view.findViewById<MaterialToolbar>(R.id.toolbar).title =
             "" + view.findViewById<MaterialToolbar>(R.id.toolbar).title + Constants.INSTRUCTION_TITLE
 
-        view.findViewById<TextView>(R.id.amount).text = "7000"
+        view.findViewById<TextView>(R.id.amount).text = context?.getString(R.string.amount_example)
         view.findViewById<TextView>(R.id.date).text =
             SimpleDateFormat(
                 Constants.DATE_FORMAT_PATTERN,
                 Locale(Constants.LANGUAGE)
             ).format(Date())
-        view.findViewById<TextView>(R.id.firstName).text = "Иван"
-        view.findViewById<TextView>(R.id.lastName).text = "Иванов"
-        view.findViewById<TextView>(R.id.percent).text = "5.6"
-        view.findViewById<TextView>(R.id.period).text = "10"
-        view.findViewById<TextView>(R.id.phoneNumber).text = "+88005553535"
+        view.findViewById<TextView>(R.id.firstName).text = context?.getString(R.string.name_example)
+        view.findViewById<TextView>(R.id.lastName).text = context?.getString(R.string.last_name_example)
+        view.findViewById<TextView>(R.id.percent).text = context?.getString(R.string.percent_example)
+        view.findViewById<TextView>(R.id.period).text = context?.getString(R.string.period_example)
+        view.findViewById<TextView>(R.id.phoneNumber).text = context?.getString(R.string.phone_number_example)
         view.findViewById<TextView>(R.id.state).text = State.APPROVED.toString()
 
     }

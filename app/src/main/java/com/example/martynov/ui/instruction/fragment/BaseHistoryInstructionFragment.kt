@@ -1,8 +1,7 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -15,7 +14,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
-open class BaseInstructionFragment: Fragment() {
+open class BaseHistoryInstructionFragment: BaseInstructionFragment() {
 
     val listItem = listOf(
         LoanEntity(
@@ -54,7 +53,6 @@ open class BaseInstructionFragment: Fragment() {
         view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
             title =
                 "" +  view.findViewById<MaterialToolbar>(R.id.toolbar).title + Constants.INSTRUCTION_TITLE
-            isEnabled = false
         }
     }
 

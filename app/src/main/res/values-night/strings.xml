@@ -24,4 +24,5 @@
     <string name="online_on_card">2) Онлайн на карту.</string>
     <string name="get_loan">Вы можете получить займ:</string>
     <string name="in_bank">1) Обратившись в отделение банка;</string>
+    <string name="amount_example">15000</string>
 </resources>

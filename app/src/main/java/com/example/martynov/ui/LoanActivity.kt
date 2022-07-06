@@ -3,7 +3,7 @@ package com.example.martynov.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.martynov.R
-import com.example.martynov.ui.fragments.LoanHistoryFragment
+import com.example.martynov.ui.fragment.LoanHistoryFragment
 import com.example.martynov.utils.Constants
 
 class LoanActivity : AppCompatActivity() {

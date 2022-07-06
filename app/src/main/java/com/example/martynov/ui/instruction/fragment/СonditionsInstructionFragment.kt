@@ -1,4 +1,4 @@
-package com.example.martynov.ui.instruction
+package com.example.martynov.ui.instruction.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,18 +8,16 @@ import android.widget.ScrollView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.example.martynov.R
+import com.example.martynov.ui.instruction.InstructionConstants
 import com.example.martynov.utils.Constants
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ConditionsInstructionFragment : Fragment() {
+class ConditionsInstructionFragment : BaseInstructionFragment() {
 
-    companion object {
-        fun newInstance(): ConditionsInstructionFragment =
-            ConditionsInstructionFragment().apply { }
-    }
+    override val tabName = InstructionConstants.CONDITIONS_TAB_NAME
+    override val description = InstructionConstants.CONDITIONS_INSTRUCTION
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,5 +41,17 @@ class ConditionsInstructionFragment : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.createLoanButton).apply {
             isEnabled = false
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<ConstraintLayout>(R.id.popupWindowConditions).isVisible =
+            true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().findViewById<ConstraintLayout>(R.id.popupWindowConditions).isVisible =
+            false
     }
 }

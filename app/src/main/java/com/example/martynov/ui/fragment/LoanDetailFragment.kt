@@ -1,4 +1,4 @@
-package com.example.martynov.ui.fragments
+package com.example.martynov.ui.fragment
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
