@@ -7,9 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 class LoanSnackbar(private val view: View) : AppSnackbar() {
 
     override fun showSnackbarToCodeResponse(code: String) {
-        when (code) {
-            else -> showSnackbar(view, Constants.INCORRECT_DATA)
-        }
+        showSnackbar(view, Constants.INCORRECT_DATA)
     }
 
     fun showSnackbarToAmountZero() {
@@ -17,11 +15,11 @@ class LoanSnackbar(private val view: View) : AppSnackbar() {
     }
 
     fun showSnackbarToEmptyFields() {
-        showSnackbar(view,  Constants.EMPTY_FIELDS)
+        showSnackbar(view, Constants.EMPTY_FIELDS)
     }
 
     fun showSnackbarToIncorrectData() {
-        showSnackbar(view,  Constants.INCORRECT_DATA)
+        showSnackbar(view, Constants.INCORRECT_DATA)
     }
 
     fun showSnackbarToUnknownError() {

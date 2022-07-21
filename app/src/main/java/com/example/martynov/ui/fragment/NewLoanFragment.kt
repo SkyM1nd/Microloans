@@ -13,31 +13,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.martynov.R
 import com.example.martynov.app.App
-import com.example.martynov.domain.entity.NewLoanEntity
 import com.example.martynov.presentation.HandlerResult
 import com.example.martynov.presentation.viewmodel.NewLoanViewModel
 import com.example.martynov.presentation.viewmodel.NewLoanViewModelFactory
 import com.example.martynov.ui.snackbar.LoanSnackbar
-import com.example.martynov.utils.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
-import java.lang.Exception
 import javax.inject.Inject
 
 
 class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
 
-    companion object {
-        fun newInstance(): NewLoanFragment =
-            NewLoanFragment().apply { }
-    }
-
     @Inject
     lateinit var newLoanViewModelFactory: NewLoanViewModelFactory
 
     private val newLoanViewModel: NewLoanViewModel by lazy {
-        ViewModelProvider(this, newLoanViewModelFactory).get(NewLoanViewModel::class.java)
+        ViewModelProvider(this, newLoanViewModelFactory)[NewLoanViewModel::class.java]
     }
+
+    private val myCoordinatorLayout: CoordinatorLayout by lazy {
+        requireActivity().findViewById(
+            R.id.loanCoordinatorLayout
+        )
+    }
+    private val loanSnackbar: LoanSnackbar by lazy { LoanSnackbar(myCoordinatorLayout) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,10 +46,16 @@ class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myCoordinatorLayout =
-            requireActivity().findViewById<CoordinatorLayout>(R.id.loanCoordinatorLayout)
-        val loanSnackbar = LoanSnackbar(myCoordinatorLayout)
+        if (savedInstanceState == null) {
+            newLoanViewModel.setProgressBarVisible(true)
+            newLoanViewModel.getLoanConditions()
+        }
 
+        initListener(view)
+        initObserve(view)
+    }
+
+    private fun initListener(view: View) {
         val amount = view.findViewById<TextInputEditText>(R.id.amount)
         amount.addTextChangedListener {
             newLoanViewModel.setAmount(amount.text.toString())
@@ -82,44 +87,11 @@ class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
         }
 
         view.findViewById<FloatingActionButton>(R.id.createLoanButton).setOnClickListener {
-            if (amount.text.toString().isNotEmpty() &&
-                firstName.text.toString().isNotEmpty() &&
-                lastName.text.toString().isNotEmpty() &&
-                percent.text.toString().isNotEmpty() &&
-                period.text.toString().isNotEmpty() &&
-                phoneNumber.text.toString().isNotEmpty()
-            ) {
-                val amountAboveZero: Boolean
-                try {
-                    amountAboveZero = amount.text.toString().toInt() > 0
-                } catch (e: Exception) {
-                    loanSnackbar.showSnackbarToIncorrectData()
-                    return@setOnClickListener
-                }
-                if (amountAboveZero) {
-                    newLoanViewModel.createNewLoan(
-                        NewLoanEntity(
-                            amount.text.toString().toInt(),
-                            firstName.text.toString(),
-                            lastName.text.toString(),
-                            percent.text.toString().toDouble(),
-                            period.text.toString().toInt(),
-                            phoneNumber.text.toString()
-                        )
-                    )
-                } else {
-                    loanSnackbar.showSnackbarToAmountZero()
-                }
-            } else {
-                loanSnackbar.showSnackbarToEmptyFields()
-            }
+            newLoanViewModel.createNewLoan()
         }
+    }
 
-        if (savedInstanceState == null) {
-            newLoanViewModel.setProgressBarVisible(true)
-            newLoanViewModel.getLoanConditions()
-        }
-
+    private fun initObserve(view: View) {
         newLoanViewModel.error.observe(viewLifecycleOwner) {
             newLoanViewModel.setProgressBarVisible(false)
             loanSnackbar.showSnackbarToUnknownError()
@@ -160,17 +132,28 @@ class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
             ) {
                 override fun resultSuccess() {
                     newLoanViewModel.setProgressBarVisible(false)
-
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, SuccessLoanCreateFragment.newInstance())
-                        .addToBackStack(Constants.ADD_SUCCESS_LOAN_CREATE_FRAGMENT)
-                        .commit()
+                    newLoanViewModel.navigateToSuccess()
                 }
             }(result)
         }
 
         newLoanViewModel.progressBarVisible.observe(viewLifecycleOwner) {
             requireActivity().findViewById<ProgressBar>(R.id.newLoanProgressBar).isVisible = it
+        }
+
+        newLoanViewModel.errorEmptyFields.observe(viewLifecycleOwner) {
+            newLoanViewModel.setProgressBarVisible(false)
+            loanSnackbar.showSnackbarToEmptyFields()
+        }
+
+        newLoanViewModel.errorAmountBelowZero.observe(viewLifecycleOwner) {
+            newLoanViewModel.setProgressBarVisible(false)
+            loanSnackbar.showSnackbarToAmountZero()
+        }
+
+        newLoanViewModel.errorIncorrectData.observe(viewLifecycleOwner) {
+            newLoanViewModel.setProgressBarVisible(false)
+            loanSnackbar.showSnackbarToIncorrectData()
         }
     }
 }

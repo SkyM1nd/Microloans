@@ -4,7 +4,6 @@ enum class ResultStatus {
     SUCCESS,
     ERROR,
     LOADING
-
 }
 
 sealed class RepositoryResult<out T>(val status: ResultStatus, val data: T?, val message: String?) {

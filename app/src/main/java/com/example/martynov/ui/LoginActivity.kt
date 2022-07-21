@@ -1,6 +1,5 @@
 package com.example.martynov.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -16,8 +15,10 @@ import com.example.martynov.domain.entity.UserEntity
 import com.example.martynov.presentation.HandlerResult
 import com.example.martynov.presentation.viewmodel.LoginViewModel
 import com.example.martynov.presentation.viewmodel.LoginViewModelFactory
-import com.example.martynov.ui.instruction.InstructionActivity
 import com.example.martynov.ui.snackbar.LoginSnackbar
+import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -25,9 +26,17 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var loginViewModelFactory: LoginViewModelFactory
 
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
+    private val navigator: Navigator = AppNavigator(this, -1)
+
     private val loginViewModel: LoginViewModel by lazy {
-        ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel::class.java)
+        ViewModelProvider(this, loginViewModelFactory)[LoginViewModel::class.java]
     }
+
+    private val myCoordinatorLayout: CoordinatorLayout by lazy { findViewById(R.id.loginCoordinatorLayout) }
+    private val loginSnackbar: LoginSnackbar by lazy { LoginSnackbar(myCoordinatorLayout) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,19 +44,43 @@ class LoginActivity : AppCompatActivity() {
 
         (applicationContext as App).appComponent.inject(this)
 
-        val myCoordinatorLayout = findViewById<CoordinatorLayout>(R.id.loginCoordinatorLayout)
-        val loginSnackbar = LoginSnackbar(myCoordinatorLayout)
-
         if (savedInstanceState == null) {
-            val token = loginViewModel.reentry()
-            if (token != null) {
-                startLoanActivity()
-            }
+            loginViewModel.reentry()
         }
 
+        initListener()
+        initObserve()
+    }
+
+    private fun initListener() {
+        val name = findViewById<EditText>(R.id.editTextUserName)
+        name.addTextChangedListener {
+            loginViewModel.setName(name.text.toString())
+        }
+
+        val password = findViewById<EditText>(R.id.editTextUserPassword)
+        password.addTextChangedListener {
+            loginViewModel.setPassword(password.text.toString())
+        }
+
+        findViewById<Button>(R.id.loginButton).setOnClickListener {
+            loginViewModel.login()
+        }
+
+        findViewById<Button>(R.id.registrationButton).setOnClickListener {
+            loginViewModel.registration()
+        }
+    }
+
+    private fun initObserve() {
         loginViewModel.error.observe(this) {
             loginViewModel.setProgressBarVisible(false)
             loginSnackbar.showSnackbarToUnknownError()
+        }
+
+        loginViewModel.errorEmptyFields.observe(this) {
+            loginViewModel.setProgressBarVisible(false)
+            loginSnackbar.showSnackbarToEmptyFields()
         }
 
         loginViewModel.resultLogin.observe(this) { result ->
@@ -56,9 +89,9 @@ class LoginActivity : AppCompatActivity() {
                     loginViewModel.setProgressBarVisible(false)
                     loginViewModel.saveToken(requireNotNull(result.data))
                     if (loginViewModel.isFirstLogin()) {
-                        startInstructionActivity()
+                        loginViewModel.navigateToInstruction()
                     } else {
-                        startLoanActivity()
+                        loginViewModel.navigateToLoan()
                     }
                 }
             }(result)
@@ -76,46 +109,15 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.progressBarVisible.observe(this) {
             findViewById<ProgressBar>(R.id.loginProgressBar).isVisible = it
         }
-
-        val name = findViewById<EditText>(R.id.editTextUserName)
-        name.addTextChangedListener {
-            loginViewModel.setName(name.text.toString())
-        }
-
-        val password = findViewById<EditText>(R.id.editTextUserPassword)
-        password.addTextChangedListener {
-            loginViewModel.setPassword(password.text.toString())
-        }
-
-        findViewById<Button>(R.id.loginButton).setOnClickListener {
-            if (name.text.isNotEmpty() and password.text.isNotEmpty()) {
-                loginViewModel.login(UserEntity(name.text.toString(), password.text.toString()))
-            } else {
-                loginSnackbar.showSnackbarToEmptyFields()
-            }
-        }
-
-        findViewById<Button>(R.id.registrationButton).setOnClickListener {
-            if (name.text.isNotEmpty() and password.text.isNotEmpty()) {
-                loginViewModel.registration(
-                    UserEntity(
-                        name.text.toString(),
-                        password.text.toString()
-                    )
-                )
-            } else {
-                loginSnackbar.showSnackbarToEmptyFields()
-            }
-        }
     }
 
-    private fun startLoanActivity() {
-        val intent = Intent(this, LoanActivity::class.java)
-        startActivity(intent)
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.setNavigator(navigator)
     }
 
-    private fun startInstructionActivity() {
-        val intent = Intent(this, InstructionActivity::class.java)
-        startActivity(intent)
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
     }
 }

@@ -24,6 +24,7 @@ ext {
     swiperefreshlayout_version = "1.0.0"
     retrofit_version = "2.3.0"
     viewpager2_version = "1.0.0"
+    cicerone_version = "7.1"
 }
 
 android {
@@ -72,6 +73,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout_version"
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
+    implementation "com.github.terrakok:cicerone:$cicerone_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }

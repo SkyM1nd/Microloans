@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:layout_marginStart="8dp"
                 android:maxLines="1"
                 android:text="@string/amount_instruction"
+                android:textColor="@color/text"
                 android:textSize="@dimen/fragment_name_text_size"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
@@ -37,6 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:maxLines="1"
                 android:text="@string/period_instruction"
+                android:textColor="@color/text"
                 android:textSize="@dimen/fragment_name_text_size"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
@@ -48,6 +51,7 @@
                 android:layout_marginStart="8dp"
                 android:maxLines="1"
                 android:text="@string/percent_instruction"
+                android:textColor="@color/text"
                 android:textSize="@dimen/fragment_name_text_size"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -61,6 +65,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="@string/conditions"
+                android:textColor="@color/text"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +79,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/max_amount"
+                android:textColor="@color/text"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -85,6 +91,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/percent"
+                android:textColor="@color/text"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -97,6 +104,7 @@
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
                 android:text="@string/period"
+                android:textColor="@color/text"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
@@ -110,7 +118,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/textlines_conditions"
+            android:background="@color/main_background"
             android:gravity="center"
             android:padding="6dp"
             android:textSize="@dimen/fragment_name_text_size"
@@ -144,12 +152,17 @@
             android:id="@+id/instructionTabLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:background="@color/menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:tabBackground="@color/menu"
             app:tabContentStart="56dp"
-            app:tabMode="scrollable" />
+            app:tabIconTint="@color/main_background"
+            app:tabIndicatorColor="@color/main_background"
+            app:tabMode="scrollable"
+            app:tabPaddingBottom="8dp"
+            app:tabTextColor="@color/text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

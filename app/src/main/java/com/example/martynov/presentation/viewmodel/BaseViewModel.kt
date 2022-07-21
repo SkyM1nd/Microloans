@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 
 open class BaseViewModel : ViewModel() {
 
-    private val _progressBarVisible = SingleLiveEvent<Boolean>(false)
+    private val _progressBarVisible = SingleLiveEvent(false)
     val progressBarVisible: LiveData<Boolean> = _progressBarVisible
 
     private val _error = SingleLiveEvent<String>()

@@ -14,6 +14,9 @@
         android:layout_height="0dp"
         android:elevation="2dp"
         android:visibility="invisible"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/progressbar"
+        android:indeterminateTintMode="src_atop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,17 +28,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="#A578DC"
+        android:backgroundTint="@color/menu"
         android:contentDescription="@string/button_new_loan"
+        app:backgroundTint="@color/menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_done_24" />
+        app:srcCompat="@drawable/ic_baseline_done_24"
+        app:tint="@color/text" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A578DC"
+        android:background="@color/menu"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,10 +56,10 @@
         android:layout_marginStart="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -79,6 +84,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/last_name"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -102,6 +108,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="600dp"
                 android:hint="@string/amount"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -159,6 +166,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/period"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -204,6 +212,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/name"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
@@ -225,6 +234,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/percent"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -247,6 +257,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/phone_number"
+                app:boxStrokeColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">

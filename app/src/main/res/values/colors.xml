@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blackout">#FFFFFFFF</color>
+    <color name="text">#B9000000</color>
+    <color name="hint">#1C1A19</color>
+    <color name="menu">#CAD8F9</color>
+    <color name="main_background">#E2E9F9</color>
+    <color name="progressbar">#6888D6</color>
+    <color name="status_bar">#536BA3</color>
 </resources>

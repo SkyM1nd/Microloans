@@ -52,21 +52,31 @@ class LoanViewHolder(val parent: ViewGroup) :
     ) {
 
     fun bind(item: LoanEntity, position: Int) {
-        (itemView as ConstraintLayout).findViewById<TextView>(R.id.date).text =
-            SimpleDateFormat(Constants.DATE_FORMAT_PATTERN, Locale(Constants.LANGUAGE)).format(item.date)
+        val drawable = ContextCompat.getDrawable(parent.context, R.drawable.shadow_box)
+        (itemView as ConstraintLayout).apply {
+            background = drawable
+
+            if (position == 1) {
+                val myLayout: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                layoutParams = myLayout
+            }
+        }
+        
+        itemView.findViewById<TextView>(R.id.date).text =
+            SimpleDateFormat(
+                Constants.DATE_FORMAT_PATTERN,
+                Locale(Constants.LANGUAGE)
+            ).format(item.date)
+
         itemView.findViewById<TextView>(R.id.amount).text =
             item.amount.toString()
+
         itemView.findViewById<TextView>(R.id.state).text =
             item.state.toString()
-        itemView.background = ContextCompat.getDrawable(parent.context, R.drawable.shadow_box)
+
         itemView.findViewById<ImageView>(R.id.detail).background =
             ContextCompat.getDrawable(parent.context, R.drawable.textlines)
-
-        if (position == 1) {
-            val myLayout: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            itemView.layoutParams = myLayout
-        }
     }
 }

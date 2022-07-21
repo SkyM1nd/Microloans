@@ -13,6 +13,7 @@ import com.example.martynov.ui.instruction.InstructionConstants
 import com.example.martynov.utils.Constants
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
 
 class ConditionsInstructionFragment : BaseInstructionFragment() {
 
@@ -33,13 +34,33 @@ class ConditionsInstructionFragment : BaseInstructionFragment() {
             true
 
         view.findViewById<MaterialToolbar>(R.id.toolbar).title =
-            "" + view.findViewById<MaterialToolbar>(R.id.toolbar).title + Constants.INSTRUCTION_TITLE
+            "" + view.findViewById<MaterialToolbar>(R.id.toolbar).title +
+                    Constants.INSTRUCTION_TITLE
 
         view.findViewById<ScrollView>(R.id.newLoanScrollView).foreground =
             ContextCompat.getDrawable(requireContext(), R.drawable.shadow_box)
 
         view.findViewById<FloatingActionButton>(R.id.createLoanButton).apply {
             isEnabled = false
+        }
+
+        view.findViewById<TextInputEditText>(R.id.amount).apply {
+            isFocusable = false
+        }
+        view.findViewById<TextInputEditText>(R.id.firstName).apply {
+            isFocusable = false
+        }
+        view.findViewById<TextInputEditText>(R.id.lastName).apply {
+            isFocusable = false
+        }
+        view.findViewById<TextInputEditText>(R.id.percent).apply {
+            isFocusable = false
+        }
+        view.findViewById<TextInputEditText>(R.id.period).apply {
+            isFocusable = false
+        }
+        view.findViewById<TextInputEditText>(R.id.phoneNumber).apply {
+            isFocusable = false
         }
     }
 

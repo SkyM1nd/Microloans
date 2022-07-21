@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.martynov.R
 import com.example.martynov.ui.instruction.InstructionConstants
 import com.example.martynov.utils.Constants

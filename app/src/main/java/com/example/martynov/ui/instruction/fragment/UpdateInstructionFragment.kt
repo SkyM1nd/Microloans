@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.martynov.R
@@ -54,31 +52,35 @@ class UpdateInstructionFragment : BaseHistoryInstructionFragment() {
     }
 
     private fun startAnimation() {
-
         val touchHand = requireActivity().findViewById<ImageView>(R.id.touchHand)
 
-        val anim1 = ObjectAnimator.ofFloat(touchHand, View.ALPHA, 100F).apply {
+        val animHandAlphaToMax = ObjectAnimator.ofFloat(touchHand, View.ALPHA, 100F).apply {
             duration = 400L
             interpolator = LinearInterpolator()
 
         }
 
-        val anim2 = ObjectAnimator.ofFloat(touchHand, View.TRANSLATION_Y, 150F).apply {
+        val animHandDown = ObjectAnimator.ofFloat(touchHand, View.TRANSLATION_Y, 150F).apply {
             duration = 700L
             interpolator = LinearInterpolator()
         }
 
-        val anim3 = ObjectAnimator.ofFloat(touchHand, View.ALPHA, 0F).apply {
+        val animHandAlphaToMin = ObjectAnimator.ofFloat(touchHand, View.ALPHA, 0F).apply {
             duration = 1000L
             interpolator = LinearInterpolator()
         }
 
-        val anim4 = ObjectAnimator.ofFloat(touchHand, View.TRANSLATION_Y, -150F).apply {
+        val animHandUp = ObjectAnimator.ofFloat(touchHand, View.TRANSLATION_Y, -150F).apply {
             duration = 1200L
             interpolator = LinearInterpolator()
         }
 
-        instructionViewModel.startAnimatorSet(anim1, anim2, anim3, anim4)
+        instructionViewModel.startAnimatorSet(
+            animHandAlphaToMax,
+            animHandDown,
+            animHandAlphaToMin,
+            animHandUp
+        )
     }
 
     override fun onResume() {

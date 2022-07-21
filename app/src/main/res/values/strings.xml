@@ -2,7 +2,7 @@
     <string name="app_name">Martynov</string>
     <string name="name">Имя:</string>
     <string name="signIn">Войти</string>
-    <string name="login">Логин</string>
+    <string name="login">Логин:</string>
     <string name="registration">Регистрация</string>
     <string name="password">Пароль:</string>
     <string name="new_loan">Новая заявка</string>
@@ -34,9 +34,12 @@
     <string name="get_loan">Вы можете получить займ:</string>
     <string name="in_bank">1) Обратившись в отделение банка;</string>
     <string name="amount_example">15000</string>
-    <string name="name_example">15000</string>
-    <string name="last_name_example">15000</string>
-    <string name="percent_example">15000</string>
-    <string name="period_example">15000</string>
-    <string name="phone_number_example">15000</string>
+    <string name="name_example">Иван</string>
+    <string name="last_name_example">Иванов</string>
+    <string name="percent_example">5.6</string>
+    <string name="period_example">10</string>
+    <string name="phone_number_example">+88005553535</string>
+    <string name="update">Обновить</string>
+    <string name="instruction">Инструкция</string>
+    <string name="exit">Выйти</string>
 </resources>

@@ -13,15 +13,16 @@ import java.util.*
 class LoanDetailFragment : Fragment(R.layout.fragment_loan_detail) {
 
     companion object {
-        fun newInstance(): LoanDetailFragment =
-            LoanDetailFragment().apply { }
+        fun newInstance(loanEntity: LoanEntity): LoanDetailFragment =
+            LoanDetailFragment().apply { item = loanEntity }
     }
+
+    var item: LoanEntity? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loanEntity =
-            requireActivity().intent.getSerializableExtra(Constants.LOAN_DETAIL) as LoanEntity
+        val loanEntity = requireNotNull(item)
 
         view.findViewById<TextView>(R.id.amount).text = loanEntity.amount.toString()
         view.findViewById<TextView>(R.id.date).text =

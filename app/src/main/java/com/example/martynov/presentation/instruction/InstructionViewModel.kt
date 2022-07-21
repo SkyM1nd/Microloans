@@ -22,31 +22,31 @@ class InstructionViewModel : ViewModel() {
     val historyAnimatorSet: LiveData<AnimatorSet> = _historyAnimatorSet
 
     fun startAnimatorSet(
-        anim1: ObjectAnimator,
-        anim2: ObjectAnimator,
-        anim3: ObjectAnimator,
-        anim4: ObjectAnimator
+        animHandAlphaToMax: ObjectAnimator,
+        animHandDown: ObjectAnimator,
+        animHandAlphaToMin: ObjectAnimator,
+        animHandUp: ObjectAnimator
     ) {
         val animatorSet = AnimatorSet()
         animatorSet.playSequentially(
-            anim1,
-            anim2,
-            anim3,
-            anim4
+            animHandAlphaToMax,
+            animHandDown,
+            animHandAlphaToMin,
+            animHandUp
         )
         _historyAnimatorSet.value = animatorSet
         _historyAnimatorSet.value!!.start()
 
-        anim2.doOnEnd {
-            _historyAnimStepTwo.value = anim2
+        animHandDown.doOnEnd {
+            _historyAnimStepTwo.value = animHandDown
         }
 
-        anim3.doOnEnd {
-            _historyAnimStepThree.value = anim3
+        animHandAlphaToMin.doOnEnd {
+            _historyAnimStepThree.value = animHandAlphaToMin
         }
 
-        anim4.doOnEnd {
-            _historyAnimStepFour.value = anim4
+        animHandUp.doOnEnd {
+            _historyAnimStepFour.value = animHandUp
         }
 
         animatorSet.doOnEnd {
@@ -56,9 +56,9 @@ class InstructionViewModel : ViewModel() {
 
     fun stopAnimatorSet() {
         if (_historyAnimatorSet.value != null) {
-            _historyAnimatorSet.value!!.removeAllListeners();
-            _historyAnimatorSet.value!!.end();
-            _historyAnimatorSet.value!!.cancel();
+            _historyAnimatorSet.value!!.removeAllListeners()
+            _historyAnimatorSet.value!!.end()
+            _historyAnimatorSet.value!!.cancel()
         }
     }
 }

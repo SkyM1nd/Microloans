@@ -4,14 +4,14 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/menu_refresh"
-        android:title="Обновить"
+        android:title="@string/update"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_instruction"
-        android:title="Инструкция"
+        android:title="@string/instruction"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_exit"
-        android:title="Выйти"
+        android:title="@string/exit"
         app:showAsAction="never" />
 </menu>

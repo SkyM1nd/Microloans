@@ -1,7 +1,6 @@
 package com.example.martynov.ui.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -19,29 +18,27 @@ import com.example.martynov.presentation.HandlerResult
 import com.example.martynov.presentation.LoanAdapter
 import com.example.martynov.presentation.viewmodel.LoanViewModel
 import com.example.martynov.presentation.viewmodel.LoanViewModelFactory
-import com.example.martynov.ui.LoginActivity
-import com.example.martynov.ui.instruction.InstructionActivity
 import com.example.martynov.ui.snackbar.LoanSnackbar
-import com.example.martynov.utils.Constants
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
-
 class LoanHistoryFragment : Fragment(R.layout.fragment_loan_history) {
-
-    companion object {
-        fun newInstance(): LoanHistoryFragment =
-            LoanHistoryFragment().apply { }
-    }
 
     @Inject
     lateinit var loanViewModelFactory: LoanViewModelFactory
 
     private val loanViewModel: LoanViewModel by lazy {
-        ViewModelProvider(this, loanViewModelFactory).get(LoanViewModel::class.java)
+        ViewModelProvider(this, loanViewModelFactory)[LoanViewModel::class.java]
     }
+
+    private val myCoordinatorLayout: CoordinatorLayout by lazy {
+        requireActivity().findViewById(
+            R.id.loanCoordinatorLayout
+        )
+    }
+    private val loanSnackbar: LoanSnackbar by lazy { LoanSnackbar(myCoordinatorLayout) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,19 +48,23 @@ class LoanHistoryFragment : Fragment(R.layout.fragment_loan_history) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myCoordinatorLayout =
-            requireActivity().findViewById<CoordinatorLayout>(R.id.loanCoordinatorLayout)
-        val loanSnackbar = LoanSnackbar(myCoordinatorLayout)
+        if (savedInstanceState == null) {
+            loanViewModel.getAllLoans()
+        }
 
+        loanViewModel.setNotFirstLogin()
+
+        initListener(view)
+        initObserve()
+    }
+
+    private fun initListener(view: View) {
         view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).setOnRefreshListener {
             updateLoan()
         }
 
         view.findViewById<FloatingActionButton>(R.id.newLoanButton).setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, NewLoanFragment.newInstance())
-                .addToBackStack(Constants.ADD_NEW_LOAN_FRAGMENT)
-                .commit()
+            loanViewModel.navigateToNewLoan()
         }
 
         view.findViewById<MaterialToolbar>(R.id.toolbar).setOnMenuItemClickListener {
@@ -75,30 +76,29 @@ class LoanHistoryFragment : Fragment(R.layout.fragment_loan_history) {
                     true
                 }
                 R.id.menu_instruction -> {
-                    requireContext().startActivity(
-                        Intent(
-                            requireContext(),
-                            InstructionActivity::class.java
-                        )
-                    )
+                    loanViewModel.navigateToInstruction()
                     true
                 }
                 R.id.menu_exit -> {
                     loanViewModel.deleteToken()
-                    val intent = Intent(requireContext(), LoginActivity::class.java)
-                    requireContext().startActivity(intent)
+                    loanViewModel.navigateToLogin()
                     true
                 }
                 else -> false
             }
         }
 
-        if (savedInstanceState == null) {
-            loanViewModel.getAllLoans()
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finishAffinity()
+                    exitProcess(0)
+                }
+            })
+    }
 
-        loanViewModel.setNotFirstLogin()
-
+    private fun initObserve() {
         loanViewModel.loans.observe(viewLifecycleOwner) {
             setDataInRecyclerView(it)
         }
@@ -134,25 +134,10 @@ class LoanHistoryFragment : Fragment(R.layout.fragment_loan_history) {
                 ) {
                 override fun resultSuccess() {
                     loanViewModel.setProgressBarVisible(false)
-
-                    requireActivity().intent.putExtra(Constants.LOAN_DETAIL, result.data)
-
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, LoanDetailFragment.newInstance())
-                        .addToBackStack(Constants.ADD_LOAN_DETAIL_FRAGMENT)
-                        .commit()
+                    loanViewModel.navigateToDetail(requireNotNull(result.data))
                 }
             }(result)
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    requireActivity().finishAffinity()
-                    exitProcess(0)
-                }
-            })
     }
 
     private fun updateLoan() {

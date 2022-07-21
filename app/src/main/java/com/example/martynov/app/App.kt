@@ -6,7 +6,6 @@ import com.example.martynov.di.AppModule
 import com.example.martynov.di.DaggerAppComponent
 
 class App : Application() {
-
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {

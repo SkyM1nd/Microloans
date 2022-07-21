@@ -9,10 +9,13 @@ import com.example.martynov.domain.usecase.DeleteTokenUseCase
 import com.example.martynov.domain.usecase.GetLoanDetailUseCase
 import com.example.martynov.domain.usecase.GetLoanHistoryUseCase
 import com.example.martynov.domain.usecase.SetNotFirstLoginUseCase
+import com.example.martynov.utils.Screen
+import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoanViewModel(
+    private val router: Router,
     private val getLoanHistoryUseCase: GetLoanHistoryUseCase,
     private val getLoanDetailUseCase: GetLoanDetailUseCase,
     private val deleteTokenUseCase: DeleteTokenUseCase,
@@ -54,5 +57,21 @@ class LoanViewModel(
 
     fun deleteToken() {
         deleteTokenUseCase()
+    }
+
+    fun navigateToNewLoan() {
+        router.navigateTo(Screen.newLoan())
+    }
+
+    fun navigateToInstruction() {
+        router.navigateTo(Screen.instruction())
+    }
+
+    fun navigateToLogin() {
+        router.navigateTo(Screen.login())
+    }
+
+    fun navigateToDetail(loanEntity: LoanEntity) {
+        router.navigateTo(Screen.detail(loanEntity))
     }
 }

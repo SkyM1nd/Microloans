@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login">Логин</string>
+    <string name="app_name">Martynov</string>
+    <string name="name">Имя:</string>
+    <string name="signIn">Войти</string>
+    <string name="login">Логин:</string>
     <string name="registration">Регистрация</string>
     <string name="password">Пароль:</string>
-    <string name="signIn">Войти</string>
-    <string name="new_loan">Новый займ</string>
+    <string name="new_loan">Новая заявка</string>
+    <string name="button_new_loan">Создать новую заявку</string>
+    <string name="history">История</string>
+    <string name="update_history">Обновление истории</string>
     <string name="menu">Меню</string>
     <string name="open_detail_loan">Открытие деталей заявки</string>
+    <string name="detail">Детали</string>
+    <string name="create_new_loan">Создание новой заявки</string>
     <string name="conditions">Условия</string>
     <string name="fill_fields">Заполнение полей</string>
     <string name="success_loan">Успешная заявка</string>
     <string name="end">Конец</string>
+    <string name="amount_instruction">30000</string>
     <string name="period_instruction">45</string>
     <string name="percent_instruction">10.5</string>
+    <string name="max_amount">Максимальная сумма:</string>
+    <string name="percent">Процент:</string>
     <string name="period">Период:</string>
     <string name="pointer">Указатель</string>
     <string name="smile">Улыбка</string>
@@ -25,4 +35,12 @@
     <string name="get_loan">Вы можете получить займ:</string>
     <string name="in_bank">1) Обратившись в отделение банка;</string>
     <string name="amount_example">15000</string>
+    <string name="name_example">Иван</string>
+    <string name="last_name_example">Иванов</string>
+    <string name="percent_example">5.6</string>
+    <string name="period_example">10</string>
+    <string name="phone_number_example">+88005553535</string>
+    <string name="instruction">Инструкция</string>
+    <string name="update">Обновить</string>
+    <string name="exit">Выйти</string>
 </resources>
